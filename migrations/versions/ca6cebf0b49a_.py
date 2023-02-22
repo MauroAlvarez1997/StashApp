@@ -1,9 +1,7 @@
-"""empty message
-
-Revision ID: 2266e4fe896d
+"""create_users_table
+Revision ID: ffdc0a98111c
 Revises:
-Create Date: 2023-02-22 03:25:47.320913
-
+Create Date: 2020-11-20 15:06:02.230689
 """
 from alembic import op
 import sqlalchemy as sa
@@ -26,7 +24,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=50), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
-    sa.Column('hashed_password', sa.String(length=50), nullable=False),
+    sa.Column('hashed_password', sa.String(length=1000), nullable=False),
     sa.Column('firstname', sa.String(length=50), nullable=False),
     sa.Column('lastname', sa.String(length=50), nullable=False),
     sa.Column('phone_number', sa.String(length=10), nullable=False),
@@ -37,6 +35,7 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+
 
     op.create_table('paymentmethods',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -51,6 +50,7 @@ def upgrade():
     if environment == "production":
         op.execute(f"ALTER TABLE paymentmethods SET SCHEMA {SCHEMA};")
 
+
     op.create_table('transactions',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('sender_id', sa.Integer(), nullable=False),
@@ -64,8 +64,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
 
-    if environment == "production":
-        op.execute(f"ALTER TABLE transactions SET SCHEMA {SCHEMA};")
+    if environment == "transactions":
+        op.execute(f"ALTER TABLE paymentmethods SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
