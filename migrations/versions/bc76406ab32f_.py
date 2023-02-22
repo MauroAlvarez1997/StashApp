@@ -1,9 +1,7 @@
-"""empty message
-
-Revision ID: e4df1dbacba3
+"""create_users_table
+Revision ID: ffdc0a98111c
 Revises:
-Create Date: 2023-02-22 02:10:01.114046
-
+Create Date: 2020-11-20 15:06:02.230689
 """
 from alembic import op
 import sqlalchemy as sa
@@ -55,6 +53,8 @@ def upgrade():
     sa.ForeignKeyConstraint(['sender_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 

@@ -22,11 +22,11 @@ class User(db.Model, UserMixin):
     # transactions = db.relationship('Transaction', backref='users')
     transaction_out = db.relationship(
         "Transaction",
-        primaryjoin="and_(User.id==Transaction.sender_id)",
+        primaryjoin="and_(User.id==Transaction.sender_id)", backref="user_out"
     )
     transaction_in = db.relationship(
         "Transaction",
-        primaryjoin="and_(User.id==Transaction.recipient_id)",
+        primaryjoin="and_(User.id==Transaction.recipient_id)", backref="user_in"
     )
 
     @property
