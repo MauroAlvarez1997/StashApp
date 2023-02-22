@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(50), nullable=False)
     firstname = db.Column(db.String(50), nullable=False)
     lastname = db.Column(db.String(50), nullable=False)
-    phone_number = db.Column(db.Integer, nullable=False)
+    phone_number = db.Column(db.String(10), nullable=False)
 
     # relationships
     payment_methods = db.relationship('PaymentMethod', back_populates='users', cascade='all, delete')

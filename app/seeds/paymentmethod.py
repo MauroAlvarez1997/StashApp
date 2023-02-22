@@ -4,7 +4,7 @@ from datetime import date
 # Adds a demo user, you can add other users here if you want
 def seed_paymentmethods():
     demo = PaymentMethod(
-        card_number=1111222233334444, expiration_date= date(2023, 12, 12), cvv=111, user_id=1)
+        card_number='1111222233334444', expiration_date= date(2023, 12, 12), cvv='111', user_id=1)
 
     db.session.add(demo)
     db.session.commit()
