@@ -1,14 +1,14 @@
-from app.models import db, User, environment, SCHEMA
+from app.models import db, Transaction, environment, SCHEMA
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_users():
-    demo = User(
-        username='Demo', email='demo@aa.io', password='password', firstname='demo', lastname='user', phone_number=1112223333)
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password', firstname='demo2', lastname='user2', phone_number=2223334444)
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password', firstname='demo3', lastname='user3', phone_number=3334445555)
+def seed_transactions():
+    demo = Transaction(
+        sender_id=1, recipient_id=2, payment_method_id=1, payment_amount=10, payment_message='payment_message')
+    marnie = Transaction(
+        sender_id=2, recipient_id=1, payment_method_id=1, payment_amount=20, payment_message='payment_message')
+    bobbie = Transaction(
+        sender_id=1, recipient_id=2, payment_method_id=1, payment_amount=30, payment_message='payment_message')
 
     db.session.add(demo)
     db.session.add(marnie)

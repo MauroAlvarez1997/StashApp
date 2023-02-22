@@ -10,9 +10,24 @@ class User(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(40), nullable=False, unique=True)
+    username = db.Column(db.String(50), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
-    hashed_password = db.Column(db.String(255), nullable=False)
+    hashed_password = db.Column(db.String(50), nullable=False)
+    firstname = db.Column(db.String(50), nullable=False)
+    lastname = db.Column(db.String(50), nullable=False)
+    phone_number = db.Column(db.Integer, nullable=False)
+
+    # relationships
+    payment_methods = db.relationship('PaymentMethod', back_populates='users', cascade='all, delete')
+    # transactions = db.relationship('Transaction', backref='users')
+    transaction_out = db.relationship(
+        "Transaction",
+        primaryjoin="and_(User.id==Transaction.sender_id)",
+    )
+    transaction_in = db.relationship(
+        "Transaction",
+        primaryjoin="and_(User.id==Transaction.recipient_id)",
+    )
 
     @property
     def password(self):
@@ -29,5 +44,26 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'firstname': self.firstname,
+            'lastname': self.lastname,
+            'email': self.email,
+            'phone_number': self.phone_number,
+            # 'sender': self.sender,
+            'transactions_in': [transaction.to_dict() for transaction in self.transaction_in],
+            'transactions_out': [transaction.to_dict() for transaction in self.transaction_out],
+            'payment_methods': [method.to_dict() for method in self.payment_methods]
+        }
+
+    def to_dict_transactions(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'firstname': self.firstname,
+            'lastname': self.lastname,
+            'email': self.email,
+            'phone_number': self.phone_number,
+            # 'payment_methods': [method.to_dict() for method in self.payment_method],
+            # 'transactions': [transaction.to_dict() for transaction in self.transactions],
+            # 'transactions_out': [transaction.to_dict() for transaction in self.transactions if transaction.sender_id == self.id],
+            # 'transactions_in': [transaction.to_dict() for transaction in self.transactions if transaction.recipient_id == self.id],
         }

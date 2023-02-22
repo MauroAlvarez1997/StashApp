@@ -1,18 +1,12 @@
-from app.models import db, User, environment, SCHEMA
-
+from app.models import db, PaymentMethod, environment, SCHEMA
+from datetime import date
 
 # Adds a demo user, you can add other users here if you want
-def seed_users():
-    demo = User(
-        username='Demo', email='demo@aa.io', password='password', firstname='demo', lastname='user', phone_number=1112223333)
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password', firstname='demo2', lastname='user2', phone_number=2223334444)
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password', firstname='demo3', lastname='user3', phone_number=3334445555)
+def seed_paymentmethods():
+    demo = PaymentMethod(
+        card_number=1111222233334444, expiration_date= date(2023, 12, 12), cvv=111, user_id=1)
 
     db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
     db.session.commit()
 
 
