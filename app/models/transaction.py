@@ -24,9 +24,9 @@ class Transaction(db.Model, UserMixin):
   # relationships
   # paymentmethods = db.relationship('PaymentMethod', back_populates='transactions')
   # users = db.relationship('User', back_populates='transactions')
-  recipient = db.relationship('User', foreign_keys=[recipient_id])
+  recipient = db.relationship('User', backref='recipient', foreign_keys=[recipient_id])
   # User.recipient = db.relationship('Transaction', foreign_keys=[recipient_id])
-  sender = db.relationship('User', foreign_keys=[sender_id])
+  sender = db.relationship('User', backref='sender', foreign_keys=[sender_id])
   # User.sender = db.relationship('Transaction', foreign_keys=[sender_id])
   # User.transactions = db.relationship('Transaction', backref='users')
 
