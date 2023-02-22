@@ -13,14 +13,14 @@ seed_commands = AppGroup('seed')
 # Creates the `flask seed all` command
 @seed_commands.command('all')
 def seed():
-    # if environment == 'production':
-    #     # Before seeding in production, you want to run the seed undo
-    #     # command, which will  truncate all tables prefixed with
-    #     # the schema name (see comment in users.py undo_users function).
-    #     # Make sure to add all your other model's undo functions below
-    #     undo_transactions()
-    #     undo_paymentmethods()
-    #     undo_users()
+    if environment == 'production':
+        # Before seeding in production, you want to run the seed undo
+        # command, which will  truncate all tables prefixed with
+        # the schema name (see comment in users.py undo_users function).
+        # Make sure to add all your other model's undo functions below
+        # undo_transactions()
+        # undo_paymentmethods()
+        undo_users()
     seed_users()
     seed_paymentmethods()
     seed_transactions()
@@ -34,3 +34,7 @@ def undo():
     undo_paymentmethods()
     undo_users()
     # Add other undo functions here
+
+
+
+# npm install --prefix react-app && npm run build --prefix react-app && pip install -r requirements.txt && pip install psycopg2 && flask db downgrade && flask db migrate && flask db upgrade  && flask seed all
