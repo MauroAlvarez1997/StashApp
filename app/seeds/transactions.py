@@ -3,16 +3,16 @@ from app.models import db, Transaction, environment, SCHEMA
 
 # Adds a demo user, you can add other users here if you want
 def seed_transactions():
-    demo = Transaction(
+    demotransaction = Transaction(
         sender_id=1, recipient_id=2, payment_method_id=1, payment_amount=10, payment_message='payment_message')
-    marnie = Transaction(
+    marnietransaction = Transaction(
         sender_id=2, recipient_id=1, payment_method_id=1, payment_amount=20, payment_message='payment_message')
-    bobbie = Transaction(
+    demotransaction2 = Transaction(
         sender_id=1, recipient_id=2, payment_method_id=1, payment_amount=30, payment_message='payment_message')
 
-    db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
+    db.session.add(demotransaction)
+    db.session.add(marnietransaction)
+    db.session.add(demotransaction2)
     db.session.commit()
 
 

@@ -3,10 +3,10 @@ from datetime import date
 
 # Adds a demo user, you can add other users here if you want
 def seed_paymentmethods():
-    demo = PaymentMethod(
+    demopayment1 = PaymentMethod(
         card_number='1111222233334444', expiration_date= date(2028, 8, 8), cvv='111', user_id=1)
 
-    db.session.add(demo)
+    db.session.add(demopayment1)
     db.session.commit()
 
 
