@@ -4,7 +4,7 @@ from datetime import date
 # Adds a demo user, you can add other users here if you want
 def seed_paymentmethods():
     demo = PaymentMethod(
-        card_number='1111222233334444', expiration_date= date(2023, 12, 12), cvv='111', user_id=1)
+        card_number='1111222233334444', expiration_date= date(2028, 8, 8), cvv='111', user_id=1)
 
     db.session.add(demo)
     db.session.commit()
@@ -16,7 +16,7 @@ def seed_paymentmethods():
 # incrementing primary key, CASCADE deletes any dependent entities.  With
 # sqlite3 in development you need to instead use DELETE to remove all data and
 # it will reset the primary keys for you as well.
-def undo_users():
+def undo_paymentmethods():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
