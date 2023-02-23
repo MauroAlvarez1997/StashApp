@@ -22,13 +22,13 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded} />
 
-      {sessionUser &&
+      {/* {sessionUser &&
           <SideNavBarPage className='sideNavBar' isLoaded={isLoaded} />
-      }
+      } */}
       {isLoaded && (
         <Switch>
-          <Route isLoaded={isLoaded} path="/activities" >
-            <ActivitiesPage />
+          <Route  path="/activities" >
+            <ActivitiesPage isLoaded={isLoaded} />
           </Route>
           <Route path="/login" >
             <LoginFormPage />
@@ -41,7 +41,7 @@ function App() {
 					</Route>
         </Switch>
       )}
-      
+
     </>
   );
 }

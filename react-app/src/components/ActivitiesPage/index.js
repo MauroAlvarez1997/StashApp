@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { thunkAllActivities } from "../../store/activities";
 import { thunkAllUsers } from "../../store/users";
+import SideNavBarPage from "../SideNavBarPage";
+import './ActivitiesPage.css'
 
 
 function ActivitiesPage({isLoaded}) {
@@ -26,7 +28,11 @@ function ActivitiesPage({isLoaded}) {
   }
 
 	return loaded && (
-		<>
+		<div className="lowerPageContainer">
+      <div className="leftLowerPageConainer">
+        <SideNavBarPage/>
+      </div>
+      <div className="rightLowerPageContainer">
       <h1>ActivitiesPage</h1>
         <div className='transactionContainer'>
 
@@ -43,7 +49,8 @@ function ActivitiesPage({isLoaded}) {
           </div>
         ))}
       </div>
-		</>
+      </div>
+		</div>
 	);
 }
 
