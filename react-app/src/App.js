@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import SplashPage from "./components/SplashPage";
 import ActivitiesPage from './components/ActivitiesPage'
 import SideNavBarPage from "./components/SideNavBarPage";
+import './index.css'
 
 function App() {
   const dispatch = useDispatch();
@@ -20,8 +21,9 @@ function App() {
   return isLoaded && (
     <>
       <Navigation isLoaded={isLoaded} />
+
       {sessionUser &&
-          <SideNavBarPage isLoaded={isLoaded} />
+          <SideNavBarPage className='sideNavBar' isLoaded={isLoaded} />
       }
       {isLoaded && (
         <Switch>
@@ -39,6 +41,7 @@ function App() {
 					</Route>
         </Switch>
       )}
+      
     </>
   );
 }

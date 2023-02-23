@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, db, Transaction
+from sqlalchemy import or_
 
 transaction_routes = Blueprint('transactions', __name__)
 
@@ -16,7 +17,7 @@ def get_all_transactions():
     my_id = current_user.id
     print('AAAAA', my_id)
 
-    all_transactions = Transaction.query.filter(my_id == Transaction.sender_id or Transaction.recipient_id).all()
+    all_transactions = Transaction.query.filter(or_(Transaction.sender_id == my_id, Transaction.recipient_id == my_id)).all()
     transactions_out = Transaction.query.filter(Transaction.sender_id == my_id).all()
     transactions_in = Transaction.query.filter(Transaction.recipient_id == my_id).all()
 

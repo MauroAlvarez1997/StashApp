@@ -8,7 +8,7 @@ function SideNavBarPage({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
 
 	return (
-		<div className='sideNavBar'>
+		<div >
       This is the side NavBar
 		</div>
 	);
