@@ -5,3 +5,77 @@
 .hidden {
   display: none;
 }
+
+.navBar{
+  width: 100%;
+  height: 100px;
+  margin-top: 0;
+  display:flex;
+  flex-direction: row;
+  justify-content:center;
+  align-items: center;
+  background-color: #f7f7f7;
+}
+
+.navBar{
+  width: 100%;
+  height: 100px;
+  margin-top: 0;
+  display:flex;
+  flex-direction: row;
+  justify-content:center;
+  align-items: center;
+}
+
+
+.navContainerHome{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 80%;
+  min-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  /* margin-top: 25px; */
+  margin-bottom: 25px;
+  padding-top: 20px;
+}
+
+.splashButton{
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  border: none;
+  mix-blend-mode: difference;
+  background-color: white;
+}
+
+.splashButtonGreen{
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  border: none;
+  background-color: #00d64f;
+}
+
+.profile-dropdown{
+  margin-left: auto;
+  margin-right: auto;
+  right: 10%;
+}
+
+.homeLogo{
+  text-decoration: none;
+  font-size: 40px;
+  font-weight: bold;
+  mix-blend-mode: difference;
+  color: white;
+}
+
+.homeLogoGreen{
+  text-decoration: none;
+  font-size: 40px;
+  font-weight: bold;
+  color: #00d64f;
+}

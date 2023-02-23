@@ -7,17 +7,34 @@ import './Navigation.css';
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
 
+	let navBarClassName;
+
+	if(!sessionUser){
+		navBarClassName = 'navBarGreen'
+	} else {
+		navBarClassName = 'navBar'
+	}
+
 	return (
-		<ul>
-			<li>
-				<NavLink exact to="/">Home</NavLink>
-			</li>
-			{isLoaded && (
-				<li>
-					<ProfileButton user={sessionUser} />
-				</li>
-			)}
-		</ul>
+		<div className={navBarClassName}>
+			<div className='navContainerHome'>
+
+
+				<div>
+				{sessionUser ? (
+						<NavLink className='homeLogoGreen' exact to="/activities"> <i class="fa-solid fa-comments-dollar"></i>  Stash App</NavLink>
+					) : (
+						<NavLink className='homeLogo' exact to="/"> <i class="fa-solid fa-comments-dollar"></i>  Stash App</NavLink>
+					)}
+
+				</div>
+				{isLoaded && (
+					<div>
+						<ProfileButton user={sessionUser} />
+					</div>
+				)}
+			</div>
+		</div>
 	);
 }
 
