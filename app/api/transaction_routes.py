@@ -92,3 +92,18 @@ def create_transaction():
         db.session.commit()
         return newTransaction.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@transaction_routes.route('/delete/<int:id>', methods=["DELETE"])
+@login_required
+def delete_like(id):
+    to_delete = Transaction.query.get(id)
+    deleted = to_delete.to_dict()
+    db.session.delete(to_delete)
+    db.session.commit()
+
+    to_delete_again = Transaction.query.get(id)
+    if not to_delete_again:
+        # return {'message': 'user deleted'}, 200
+        return deleted
+    return {'message': 'unable to delete user'}

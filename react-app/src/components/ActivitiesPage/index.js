@@ -7,6 +7,7 @@ import SideNavBarPage from "../SideNavBarPage";
 import './ActivitiesPage.css'
 import OpenModalButton from "../OpenModalButton";
 import UpdateTransactionModal from "../UpdateTransactionModal";
+import { thunkDeleteActivities } from "../../store/activities";
 
 
 function ActivitiesPage({isLoaded}) {
@@ -23,6 +24,13 @@ function ActivitiesPage({isLoaded}) {
   useEffect(() => {
 		dispatch(thunkAllActivities()).then(dispatch(thunkAllUsers())).then(() => setLoaded(true));
 	}, [dispatch]);
+
+  async function handleDelete(id) {
+		const awaitedData = await dispatch(thunkDeleteActivities(id)).then(dispatch(thunkAllActivities()));
+		if (awaitedData) {
+      alert("You have deleted this transaction")
+		}
+	}
 
   if(!allUsersArr.length){
     return (
@@ -55,7 +63,7 @@ function ActivitiesPage({isLoaded}) {
                     // onItemClick={closeMenu}
                     modalComponent={<UpdateTransactionModal transaction_id={transaction.id} />}
                   />
-                  <button>
+                  <button onClick={()=>handleDelete(transaction.id)}>
                     Delete
                   </button>
                 </div>

@@ -21,8 +21,8 @@ const deleteActivities = (data) => ({
 	payload: data,
 });
 
-export const thunkDeleteActivities = () => async (dispatch) => {
-	const response = await fetch("/api/transactions/delete", {
+export const thunkDeleteActivities = (id) => async (dispatch) => {
+	const response = await fetch(`/api/transactions/delete/${id}`, {
 		method: "DELETE",
 	});
 	if (response.ok) {
@@ -99,7 +99,13 @@ export default function transactions(state = initialState, action) {
 			newState.all_transactions[newActivity.id] = newActivity
 			newState.transactions_out[newActivity.id] = newActivity
 			return newState
+		case DELETE_ACTIVITIES:
+			const deletedActivity = action.payload
+			console.log('deleted activity in reducer',deletedActivity)
+			delete newState.all_transactions[deletedActivity.id]
+			delete newState.transactions_out[deletedActivity.id]
+			return newState;
 		default:
-			return state;
+			return newState;
 	}
 }
