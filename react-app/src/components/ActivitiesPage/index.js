@@ -5,11 +5,14 @@ import { thunkAllActivities } from "../../store/activities";
 import { thunkAllUsers } from "../../store/users";
 import SideNavBarPage from "../SideNavBarPage";
 import './ActivitiesPage.css'
+import OpenModalButton from "../OpenModalButton";
+import UpdateTransactionModal from "../UpdateTransactionModal";
 
 
 function ActivitiesPage({isLoaded}) {
   const transactions = useSelector(state => state.transactions);
   const users = useSelector(state => state.users)
+  const currentUser = useSelector(state => state.session.user)
   const allUsersObj = users.all_users
   const allUsersArr = Object.values(allUsersObj)
 
@@ -45,6 +48,19 @@ function ActivitiesPage({isLoaded}) {
               <div>{transaction.created_at}</div>
               <div>{transaction.payment_message}</div>
               <div>${transaction.payment_amount}</div>
+              {(currentUser.id === transaction.sender_id) && (
+                <div>
+                  <OpenModalButton
+                    buttonText="Update"
+                    // onItemClick={closeMenu}
+                    modalComponent={<UpdateTransactionModal transaction_id={transaction.id} />}
+                  />
+                  <button>
+                    Delete
+                  </button>
+                </div>
+              )
+              }
             </div>
           </div>
         ))}

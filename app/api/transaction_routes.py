@@ -2,8 +2,20 @@ from flask import Blueprint, jsonify, session, request
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, db, Transaction
 from sqlalchemy import or_
+from app.forms.transaction_form import TransactionForm
 
 transaction_routes = Blueprint('transactions', __name__)
+
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
+
 
 @transaction_routes.route('/all')
 @login_required
@@ -41,3 +53,42 @@ def get_all_transactions():
         transactions_in_obj[i.id] = i.to_dict()
 
     return {'all_transactions': all_transactions_obj, 'transactions_out': transactions_out_obj, 'transactions_in': transactions_in_obj,}
+
+
+@transaction_routes.route('/update/<int:transaction_id>', methods=['PUT'])
+@login_required
+def update_transaction(transaction_id):
+    form = TransactionForm()
+
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        transaction_to_update = Transaction.query.filter(Transaction.id == transaction_id).one()
+        # dicted = transaction_to_update.to_dict()
+        # print('HERES MY TRANSACTION TO UPDATE!!!!!!!!!', dicted)
+        transaction_to_update.sender_id = form.data['sender_id']
+        transaction_to_update.recipient_id = form.data['recipient_id']
+        transaction_to_update.payment_method_id = form.data['payment_method_id']
+        transaction_to_update.payment_amount = form.data['payment_amount']
+        transaction_to_update.payment_message = form.data['payment_message']
+        # transaction_to_update.created_at = form.data['created_at']
+        db.session.commit()
+        return transaction_to_update.to_dict()
+    return {}
+
+@transaction_routes.route('/create', methods=['POST'])
+@login_required
+def create_transaction():
+    form = TransactionForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        newTransaction = Transaction(
+            sender_id=form.data['sender_id'],
+            recipient_id=form.data['recipient_id'],
+            payment_method_id=form.data['payment_method_id'],
+            payment_amount=form.data['payment_amount'],
+            payment_message=form.data['payment_message'],
+        )
+        db.session.add(newTransaction)
+        db.session.commit()
+        return newTransaction.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401

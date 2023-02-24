@@ -1,6 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import OpenModalButton from '../OpenModalButton';
+import UpdateTransactionModal from '../UpdateTransactionModal';
+import CreateTransactionModal from '../CreateTransactionModal';
 
 import './SideNavBarPage.css';
 
@@ -25,6 +28,11 @@ function SideNavBarPage({ isLoaded }){
         <div className='sideNavBarClickLink'></div>
         <div className='sideNavBarClickLink'></div>
         <div className='sideNavBarClickLink'></div>
+        <OpenModalButton
+                    buttonText="Update"
+                    // onItemClick={closeMenu}
+                    modalComponent={<CreateTransactionModal  />}
+                  />
       </div>
 		</div>
 	);
