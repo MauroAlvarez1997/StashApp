@@ -25,7 +25,11 @@ function SideNavBarPage({ isLoaded }){
           </NavLink>
 
         </div>
-        <div className='sideNavBarClickLink'></div>
+        <div className='sideNavBarClickLink'>
+          <NavLink exact to="/payment-methods">
+          <i class="fa-regular fa-credit-card"></i> Payment Methods
+          </NavLink>
+        </div>
         <div className='sideNavBarClickLink'></div>
         <div className='sideNavBarClickLink'></div>
         <OpenModalButton

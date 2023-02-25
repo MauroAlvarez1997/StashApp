@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import session from './session'
 import transactions from './activities';
 import users from './users';
+import paymentMethods from './pymentmethods';
 
 const rootReducer = combineReducers({
   session,
   transactions,
   users,
+  paymentMethods,
 });
 
 

@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import SplashPage from "./components/SplashPage";
 import ActivitiesPage from './components/ActivitiesPage'
 import SideNavBarPage from "./components/SideNavBarPage";
+import PaymentMethodsPage from "./components/PaymentMethodsPage";
 import './index.css'
 
 function App() {
@@ -29,6 +30,9 @@ function App() {
         <Switch>
           <Route  path="/activities" >
             <ActivitiesPage isLoaded={isLoaded} />
+          </Route>
+          <Route  path="/payment-methods" >
+            <PaymentMethodsPage isLoaded={isLoaded} />
           </Route>
           <Route path="/login" >
             <LoginFormPage />
