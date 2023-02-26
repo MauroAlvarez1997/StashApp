@@ -38,6 +38,7 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+        
     op.create_table('paymentmethods',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('card_number', sa.String(length=16), nullable=False),
@@ -49,7 +50,8 @@ def upgrade():
     sa.UniqueConstraint('card_number')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE production SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE paymentmethods SET SCHEMA {SCHEMA};")
+
     op.create_table('transactions',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('sender_id', sa.Integer(), nullable=False),
