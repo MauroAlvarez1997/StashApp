@@ -55,10 +55,10 @@ function CreatePaymentMethodModal() {
 				Card Number:
 				<input
 					type='tel'
-          inputmode="numeric"
+          inputMode="numeric"
           pattern="[0-9\s]{13,19}"
-          maxlength="16"
-          minlength="16"
+          maxLength="16"
+          minLength="16"
           placeholder="xxxxxxxxxxxxxxxx"
 					value={cardNumber}
 					onChange={(e) => setCardNumber(e.target.value)}
@@ -69,7 +69,7 @@ function CreatePaymentMethodModal() {
          CVV:
          <input
             type="tel"
-            inputmode="numeric"
+            inputMode="numeric"
             pattern="[0-9\s]{3,3}"
             placeholder="xxx"
             value={cvv}

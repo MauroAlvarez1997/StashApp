@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
-import { thunkAllPaymentMethods } from "../../store/pymentmethods";
+import { thunkAllPaymentMethods, thunkDeletePaymentMethod } from "../../store/pymentmethods";
+import { thunkAllActivities } from "../../store/activities";
 import SideNavBarPage from "../SideNavBarPage";
 import OpenModalButton from "../OpenModalButton";
 import './PaymentMethodsPage.css'
 import CreatePaymentMethodModal from "../CreatePaymentMethodModal";
+import UpdatePaymentMethodModal from "../UpdatePaymentMethodModal";
 
 function PaymentMethodsPage({isLoaded}) {
   const transactions = useSelector(state => state.transactions);
@@ -24,12 +26,12 @@ function PaymentMethodsPage({isLoaded}) {
 		dispatch(thunkAllPaymentMethods()).then(() => setLoaded(true));
 	}, [dispatch]);
 
-  // async function handleDelete(id) {
-	// 	const awaitedData = await dispatch(thunkDeleteActivities(id)).then(dispatch(thunkAllActivities()));
-	// 	if (awaitedData) {
-  //     alert("You have deleted this transaction")
-	// 	}
-	// }
+  async function handleDelete(id) {
+		const awaitedData = await dispatch(thunkDeletePaymentMethod(id)).then(dispatch(thunkAllActivities()));
+		if (awaitedData) {
+      alert("You have deleted this Payment Method")
+		}
+	}
 
 
   return loaded && (
@@ -60,6 +62,17 @@ function PaymentMethodsPage({isLoaded}) {
                 <div className="cvv">
                   <i class="fa-solid fa-lock"></i>**{card.cvv.substr(card.cvv.length - 1)}
                 </div>
+              </div>
+              <div className="BottomCardButtonContainer">
+              <OpenModalButton
+                    buttonText="Update"
+                    // onItemClick={closeMenu}
+                    modalComponent={<UpdatePaymentMethodModal paymentmethod_id={card.id} />}
+                  />
+                  <button onClick={()=>handleDelete(card.id)}>
+                    Delete
+                  </button>
+
               </div>
             </div>
           ))}
