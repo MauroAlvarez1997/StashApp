@@ -13,6 +13,10 @@ function LoginFormModal() {
   const { closeModal } = useModal();
   const history = useHistory();
 
+  const demoInput = () => {
+		setEmail("demo@aa.io");
+		setPassword("password");
+	};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,7 +56,12 @@ function LoginFormModal() {
             required
           />
         </label>
-        <button type="submit">Log In</button>
+        <button type="submit">
+          Log In
+        </button>
+        <button onClick={demoInput}>
+					Demo User
+				</button>
       </form>
     </>
   );

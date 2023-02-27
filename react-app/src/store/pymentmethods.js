@@ -39,11 +39,19 @@ export const thunkCreatePaymentMethod = (data) => async (dispatch) => {
 		},
 		body: JSON.stringify(data),
 	});
-  console.log('this is the response in thunk', response)
+	console.log('THIS IS THUNK CREAT RESPONSE', response)
 	if (response.ok) {
 		let newPaymentMethod = await response.json();
 
 		dispatch(createPaymentMethods(newPaymentMethod));
+		return null
+	} else if(response.status < 500){
+		const data = await response.json();
+			if (data.errors) {
+				return data.errors;
+			}
+	} else {
+		return ["A payment method with these credentils is already in use."];
 	}
 };
 
