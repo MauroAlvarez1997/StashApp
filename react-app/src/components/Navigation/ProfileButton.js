@@ -58,7 +58,7 @@ function ProfileButton({ user }) {
           <>
 
               <button className="splashButtonGreen" onClick={handleLogout}>Log Out</button>
-            
+
           </>
         ) : (
           <>

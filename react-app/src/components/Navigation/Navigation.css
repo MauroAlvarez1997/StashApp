@@ -51,12 +51,37 @@
   background-color: white;
 }
 
+.splashButton2{
+  border-radius: 10px;
+  border: none;
+  /* mix-blend-mode: difference; */
+
+  font-weight: bolder;
+  color: white;
+  background-color: #16df45;
+  display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 18px;
+    max-width: 152px;
+}
+
 .splashButtonGreen{
   width: 60px;
   height: 60px;
   border-radius: 30px;
   border: none;
   background-color: #00d64f;
+  z-index: auto;
 }
 
 .profile-dropdown{

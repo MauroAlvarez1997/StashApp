@@ -34,7 +34,6 @@ function SideNavBarPage({ isLoaded }){
         <div className='sideNavBarClickLink'></div>
         <OpenModalButton
                     buttonText="NEW"
-                    // onItemClick={closeMenu}
                     modalComponent={<CreateTransactionModal  />}
                   />
       </div>
