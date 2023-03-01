@@ -3,14 +3,13 @@ import { thunkCreatePaymentMethod } from "../../store/pymentmethods";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
+import { thunkAllPaymentMethods } from "../../store/pymentmethods";
 
 
 function CreatePaymentMethodModal() {
   const currentUser = useSelector(state => state.session.user);
   let date = new Date()
   const final = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) + '-' + (date.getDate() + 1 ).toString().padStart(2, 0);
-
-  console.log(final)
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -19,11 +18,6 @@ function CreatePaymentMethodModal() {
   const [cardNumber, setCardNumber] = useState('')
   const [cvv, setCvv] = useState('');
   const [expirationDate, setExpirationDate] = useState(final)
-
-
-  console.log(expirationDate)
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,7 +30,7 @@ function CreatePaymentMethodModal() {
       user_id: currentUser.id,
     }
 
-    const createdPaymentMethod = await dispatch(thunkCreatePaymentMethod(data));
+    const createdPaymentMethod = await dispatch(thunkCreatePaymentMethod(data)).then(dispatch(thunkAllPaymentMethods(data)));
     if (createdPaymentMethod) {
       setErrors(createdPaymentMethod);
     } else {

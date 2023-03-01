@@ -39,7 +39,6 @@ export const thunkCreatePaymentMethod = (data) => async (dispatch) => {
 		},
 		body: JSON.stringify(data),
 	});
-	console.log('THIS IS THUNK CREAT RESPONSE', response)
 	if (response.ok) {
 		let newPaymentMethod = await response.json();
 

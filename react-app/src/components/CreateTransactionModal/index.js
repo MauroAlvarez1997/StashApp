@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { thunkCreateActivity } from "../../store/activities";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
-
+import { thunkAllPaymentMethods } from "../../store/pymentmethods";
 
 function CreateTransactionModal() {
   const allUsersObj = useSelector(state => state.users.all_users);
   const currentUser = useSelector(state => state.session.user);
+  const statePaymentMethodsObj = useSelector(state => state.paymentMethods);
+
+  console.log('HELLO FORM INSIDE THE MODAL', statePaymentMethodsObj)
+
   let allUsersArr = Object.values(allUsersObj)
-  let paymentMethodsArr = ['', ...currentUser.payment_methods]
+  let initialPayMethodArr = Object.values(statePaymentMethodsObj.all_payment_methods)
+  let paymentMethodsArr = ['', ...initialPayMethodArr]
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -19,6 +24,11 @@ function CreateTransactionModal() {
   const [message, setMessage] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('')
   const [amount, setAmount] = useState(0)
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+		dispatch(thunkAllPaymentMethods()).then(() => setLoaded(true));
+	}, [dispatch]);
 
   const filteredUsersArr = ['', ...allUsersArr?.filter(user => user.id !== currentUser.id)]
   const filteredUsersObj = {}
@@ -49,7 +59,13 @@ function CreateTransactionModal() {
     }
   };
 
-  return (
+  if(!initialPayMethodArr.length){
+    return (
+      <h1>Can't create transaction without payment methods</h1>
+    )
+  }
+
+  return loaded && (
     <div className="modlBody">
       <h1 className="modalTitle">Send Money</h1>
       <form className="modalFormBody" onSubmit={handleSubmit}>

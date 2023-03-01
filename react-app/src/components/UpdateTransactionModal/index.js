@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 function UpdateTransactionModal({transaction_id}) {
   const transactionsOut = useSelector(state => state.transactions.transactions_out);
   const currentTransaction = transactionsOut[transaction_id]
-  console.log(currentTransaction)
+
   const dispatch = useDispatch();
   const [message, setMessage] = useState(currentTransaction.payment_message);
   const [errors, setErrors] = useState([]);
@@ -28,7 +28,6 @@ function UpdateTransactionModal({transaction_id}) {
     }
 
     const updatedTransaction = await dispatch(thunkUpdateActivity(data, transaction_id));
-    console.log('HERES THE UPDATED TRANSACTION',updatedTransaction)
     if (updatedTransaction) {
       setErrors(updatedTransaction);
     } else {

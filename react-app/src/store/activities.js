@@ -101,7 +101,6 @@ export default function transactions(state = initialState, action) {
 			return newState
 		case DELETE_ACTIVITIES:
 			const deletedActivity = action.payload
-			console.log('deleted activity in reducer',deletedActivity)
 			delete newState.all_transactions[deletedActivity.id]
 			delete newState.transactions_out[deletedActivity.id]
 			return newState;

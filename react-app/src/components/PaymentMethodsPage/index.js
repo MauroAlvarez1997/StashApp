@@ -13,10 +13,9 @@ function PaymentMethodsPage({isLoaded}) {
   const transactions = useSelector(state => state.transactions);
   const paymentMethodsObj = useSelector(state => state.paymentMethods.all_payment_methods)
   const currentUser = useSelector(state => state.session.user)
-  console.log(paymentMethodsObj)
+
   // const allUsersObj = users.all_users
   const paymentMethodsArr = Object.values(paymentMethodsObj)
-  console.log(paymentMethodsArr)
 
   const dispatch = useDispatch();
   const [loaded, setLoaded] = useState(false);
@@ -48,7 +47,7 @@ function PaymentMethodsPage({isLoaded}) {
         <div className="createCardContainer">
           <OpenModalButton
             buttonText="Add Payment Method"
-            modalComponent={<CreatePaymentMethodModal />}
+            modalComponent={<CreatePaymentMethodModal  />}
           />
         </div>
         <div className="allPaymentMethodsContainer">

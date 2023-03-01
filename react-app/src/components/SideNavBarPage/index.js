@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import OpenModalButton from '../OpenModalButton';
-import UpdateTransactionModal from '../UpdateTransactionModal';
 import CreateTransactionModal from '../CreateTransactionModal';
-
+import { thunkAllPaymentMethods } from "../../store/pymentmethods";
 import './SideNavBarPage.css';
 
-function SideNavBarPage({ isLoaded }){
+function SideNavBarPage(){
 	const sessionUser = useSelector(state => state.session.user);
+  const dispatch = useDispatch();
+  const [loaded, setLoaded] = useState(false);
+  const statePaymentMethodsObj = useSelector(state => state.paymentMethods);
+  console.log('this is the side nav bar',statePaymentMethodsObj)
+
+  useEffect(() => {
+		dispatch(thunkAllPaymentMethods()).then(() => setLoaded(true));
+	}, [dispatch]);
 
 
-	return (
+
+	return loaded && (
 		<div className='sideNavBar'>
       <div className='topUserInfoSideNav'>
         <div className='SideNavIcon'>
@@ -37,7 +45,7 @@ function SideNavBarPage({ isLoaded }){
       </div>
         <OpenModalButton
                     buttonText="NEW"
-                    modalComponent={<CreateTransactionModal  />}
+                    modalComponent={<CreateTransactionModal />}
                   />
 		</div>
 	);
