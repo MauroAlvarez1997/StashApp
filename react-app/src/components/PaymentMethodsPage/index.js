@@ -40,7 +40,11 @@ function PaymentMethodsPage({isLoaded}) {
         <SideNavBarPage/>
       </div>
       <div className="rightLowerPageContainer">
-        <h1>Payment Method Page</h1>
+      <div className="PageTitleContainer">
+        <h1 className="PageTitle">Payment Method Page</h1>
+
+      </div>
+      <div className="button-paymentMethod-Container">
         <div className="createCardContainer">
           <OpenModalButton
             buttonText="Add Payment Method"
@@ -52,7 +56,7 @@ function PaymentMethodsPage({isLoaded}) {
             <div className="singleCardContainer" key={card.id}>
               <div className="topCardContainer">
                 <div className="cardNumber">
-                  <i class="fa-solid fa-lock"></i>**** **** **** {card.card_number.substr(card.card_number.length - 4)}
+                  <i class="fa-solid fa-lock"></i> **** **** **** {card.card_number.substr(card.card_number.length - 4)}
                 </div>
               </div>
               <div className="bottomCardContainer">
@@ -72,11 +76,11 @@ function PaymentMethodsPage({isLoaded}) {
                   <button className="deleteButton" onClick={()=>handleDelete(card.id)}>
                     Delete
                   </button>
-
               </div>
             </div>
           ))}
         </div>
+      </div>
 
 
       </div>
