@@ -63,7 +63,7 @@ function ActivitiesPage({isLoaded}) {
                     // onItemClick={closeMenu}
                     modalComponent={<UpdateTransactionModal transaction_id={transaction.id} />}
                   />
-                  <button onClick={()=>handleDelete(transaction.id)}>
+                  <button className="deleteButton" onClick={()=>handleDelete(transaction.id)}>
                     Delete
                   </button>
                 </div>

@@ -39,26 +39,29 @@ function UpdateTransactionModal({transaction_id}) {
   if(!currentTransaction) return <h1>Loading Transaction...</h1>
 
   return (
-    <>
-      <h1>Update</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="modlBody">
+      <h1 className="modalTitle">Update</h1>
+      <form className="modalFormBody" onSubmit={handleSubmit}>
         { errors.length && (<ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>)}
-        <label>
+        <label className='labelContainer'>
           Message
           <input
+          className="inputBox"
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             required
           />
         </label>
-        <button type="submit">Update</button>
+        <div className="logInButtoncontainer">
+          <button className="splashButton2" type="submit">Update</button>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 

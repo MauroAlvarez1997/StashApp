@@ -69,7 +69,7 @@ function PaymentMethodsPage({isLoaded}) {
                     // onItemClick={closeMenu}
                     modalComponent={<UpdatePaymentMethodModal paymentmethod_id={card.id} />}
                   />
-                  <button onClick={()=>handleDelete(card.id)}>
+                  <button className="deleteButton" onClick={()=>handleDelete(card.id)}>
                     Delete
                   </button>
 

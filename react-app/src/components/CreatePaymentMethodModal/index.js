@@ -10,6 +10,8 @@ function CreatePaymentMethodModal() {
   let date = new Date()
   const final = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) + '-' + (date.getDate() + 1 ).toString().padStart(2, 0);
 
+  console.log(final)
+
   const dispatch = useDispatch();
   const history = useHistory();
   const { closeModal } = useModal();
@@ -17,11 +19,11 @@ function CreatePaymentMethodModal() {
   const [cardNumber, setCardNumber] = useState('')
   const [cvv, setCvv] = useState('');
   const [expirationDate, setExpirationDate] = useState(final)
-  const [amount, setAmount] = useState(0)
 
 
-  // let cardIsNum = /^\d+$/.test(cardNumber);
-  // let cvvIsNum = /^\d+$/.test(cvv);
+  console.log(expirationDate)
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,17 +45,18 @@ function CreatePaymentMethodModal() {
   };
 
   return (
-    <div>
-      <h1>Input Card Informtion</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="modlBody">
+      <h1 className="modalTitle">Input Card Informtion</h1>
+      <form className="modalFormBody" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
-      <label >
+      <label className='labelContainer'>
 				Card Number:
 				<input
+        className="inputBox"
 					type='tel'
           inputMode="numeric"
           pattern="[0-9\s]{13,19}"
@@ -65,9 +68,10 @@ function CreatePaymentMethodModal() {
 					required
 				/>
 			</label>
-      <label>
+      <label className='labelContainer'>
          CVV:
          <input
+         className="inputBox"
             type="tel"
             inputMode="numeric"
             pattern="[0-9\s]{3,3}"
@@ -80,20 +84,23 @@ function CreatePaymentMethodModal() {
          >
          </input>
        </label>
-       <label>
+       <label className='labelContainer'>
          Expiration Date:
          <input
-           type="date"
-           value={expirationDate}
-           onChange={(e) => setExpirationDate(e.target.value)}
-            min={final}
-           required
+         className="inputBox"
+          type="date"
+          value={expirationDate}
+          onChange={(e) => setExpirationDate(e.target.value)}
+          min={final}
+          required
          >
          </input>
        </label>
-         <button type='submit'>
+       <div className="logInButtoncontainer">
+         <button className="splashButton2" type='submit'>
            Create Card
          </button>
+       </div>
        </form>
 
 

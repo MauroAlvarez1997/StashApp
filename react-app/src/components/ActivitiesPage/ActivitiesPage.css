@@ -42,6 +42,25 @@
   box-sizing: border-box;
 }
 
+.deleteButton{
+  border-radius: 10px;
+  border: none;
+  /* mix-blend-mode: difference; */
+  font-weight: bolder;
+  color: white;
+  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 18px;
+  max-width: 152px;
+}
+
 .rightLowerPageContainer{
 
 }

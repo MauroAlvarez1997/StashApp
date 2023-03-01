@@ -11,11 +11,12 @@ function UpdatePaymentMethodModal({paymentmethod_id}) {
   const currentUser = useSelector(state => state.session.user);
 
   let expDateUnformted = new Date(currentPaymentMethod.expiration_date)
-  let currExpDateFormted = expDateUnformted.getFullYear().toString() + '-' + (expDateUnformted.getMonth() + 1).toString().padStart(2, 0) + '-' + (expDateUnformted.getDate() + 1 ).toString().padStart(2, 0);
+  let currExpDateFormted = expDateUnformted.getFullYear().toString() + '-' + (expDateUnformted.getMonth() + 1).toString().padStart(2, 0) + '-' + (expDateUnformted.getDate() + 1).toString().padStart(2, 0);
 
 
   let date = new Date()
-  const final = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) + '-' + (date.getDate() + 1 ).toString().padStart(2, 0);
+  const finalDate = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) + '-' + (date.getDate() + 1).toString().padStart(2, 0);
+
 
   const dispatch = useDispatch();
   const [cardNumber, setCardNumber] = useState(currentPaymentMethod.card_number);
@@ -47,17 +48,18 @@ function UpdatePaymentMethodModal({paymentmethod_id}) {
   if(!currentPaymentMethod) return <h1>Loading Transaction...</h1>
 
   return (
-    <div>
-    <h1>Input Card Informtion</h1>
-    <form onSubmit={handleSubmit}>
+    <div className="modlBody">
+    <h1 className="modalTitle">Input Card Informtion</h1>
+    <form className="modalFormBody" onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
       </ul>
-    <label >
+    <label className='labelContainer'>
       Card Number:
       <input
+      className="inputBox"
         type='tel'
         inputMode="numeric"
         pattern="[0-9\s]{13,19}"
@@ -69,9 +71,10 @@ function UpdatePaymentMethodModal({paymentmethod_id}) {
         required
       />
     </label>
-    <label>
+    <label className='labelContainer'>
        CVV:
        <input
+       className="inputBox"
           type="tel"
           inputMode="numeric"
           pattern="[0-9\s]{3,3}"
@@ -84,20 +87,23 @@ function UpdatePaymentMethodModal({paymentmethod_id}) {
        >
        </input>
      </label>
-     <label>
+     <label className='labelContainer'>
        Expiration Date:
        <input
-         type="date"
-         value={expirationDate}
-         onChange={(e) => setExpirationDate(e.target.value)}
-          min={final}
-         required
+       className="inputBox"
+        type="date"
+        min={finalDate}
+        value={expirationDate}
+        onChange={(e) => setExpirationDate(e.target.value)}
+        required
        >
        </input>
      </label>
-       <button type='submit'>
+     <div className="logInButtoncontainer">
+       <button className="splashButton2" type='submit'>
          Update Card
        </button>
+     </div>
      </form>
   </div>
   );

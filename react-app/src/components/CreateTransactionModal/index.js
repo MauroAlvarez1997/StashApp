@@ -50,12 +50,13 @@ function CreateTransactionModal() {
   };
 
   return (
-    <div>
-      <h1>Send Money</h1>
-      <form onSubmit={handleSubmit}>
-      <label >
+    <div className="modlBody">
+      <h1 className="modalTitle">Send Money</h1>
+      <form className="modalFormBody" onSubmit={handleSubmit}>
+      <label className='labelContainer'>
 				Amount: $
 				<input
+        className="inputBox"
 					type='number'
 					value={amount}
 					onChange={(e) => setAmount(e.target.value)}
@@ -63,35 +64,38 @@ function CreateTransactionModal() {
 					min={0}
 				/>
 			</label>
-      <label>
+      <label className='labelContainer'>
          Recipient
          <select
+          className="inputBox"
            type="text"
            value={recipient}
            onChange={(e) => setRecipient(e.target.value)}
            required
          >
           {filteredUsersArr.map((option) => (
-									<option key={option.id}>{option.username}</option>
+									<option className="inputBox" key={option.id}>{option.username}</option>
 								))}
          </select>
        </label>
-       <label>
+       <label className='labelContainer'>
          Payment Method
          <select
+         className="inputBox"
            type="text"
            value={paymentMethod}
            onChange={(e) => setPaymentMethod(e.target.value)}
            required
          >
           {paymentMethodsArr.map((option) => (
-									<option key={option.id}>{option.card_number}</option>
+									<option className="inputBox" key={option.id}>{option.card_number}</option>
 								))}
          </select>
-       </label>
-       <label className='create-profile-field'>
+       </label >
+       <label className='labelContainer'>
 			  	Message:
 			  	<input
+          className="inputBox"
 			  		type='text'
 			  		value={message}
 			  		onChange={(e) => setMessage(e.target.value)}
@@ -99,9 +103,11 @@ function CreateTransactionModal() {
 			  		maxLength={150}
 			  	/>
 			  </label>
-        <button type='submit'>
+        <div className="logInButtoncontainer">
+        <button className="splashButton2" type='submit'>
 					Send Money
 				</button>
+        </div>
       </form>
 
     </div>
