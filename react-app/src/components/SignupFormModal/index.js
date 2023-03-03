@@ -49,7 +49,8 @@ function SignupFormModal() {
 					Email
 					<input
 						className="inputBox"
-						type="text"
+						placeholder="Ex: Tony@aa.io"
+						type="email"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						required
@@ -60,6 +61,8 @@ function SignupFormModal() {
 					<input
 					className="inputBox"
 						type="text"
+						placeholder="Ex: TonyTheTiger"
+						maxLength="15"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 						required
@@ -70,6 +73,8 @@ function SignupFormModal() {
           <input
 					className="inputBox"
             type="text"
+						placeholder="Ex: Tony"
+						maxLength="15"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
@@ -80,6 +85,8 @@ function SignupFormModal() {
           <input
 					className="inputBox"
             type="text"
+						placeholder="Ex: Montana"
+						maxLength="15"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
@@ -89,11 +96,13 @@ function SignupFormModal() {
           Phone Number
           <input
 					className="inputBox"
-            type="text"
+            type="tel"
+						placeholder="enter 10 digit number"
+						pattern="[0-9\s]{10,10}"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
-            minlength="10"
-            maxlength="10"
+            minLength="10"
+            maxLength="10"
             required
           />
         </label>

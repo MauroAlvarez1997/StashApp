@@ -41,11 +41,13 @@ function UpdateTransactionModal({transaction_id}) {
     <div className="modlBody">
       <h1 className="modalTitle">Update</h1>
       <form className="modalFormBody" onSubmit={handleSubmit}>
-        { errors.length && (<ul>
+        {/* {errors.length && (
+        )} */}
+        <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
-        </ul>)}
+        </ul>
         <label className='labelContainer'>
           Message
           <input
