@@ -13,10 +13,8 @@ function UpdatePaymentMethodModal({paymentmethod_id}) {
   let expDateUnformted = new Date(currentPaymentMethod.expiration_date)
   let currExpDateFormted = expDateUnformted.getFullYear().toString() + '-' + (expDateUnformted.getMonth() + 1).toString().padStart(2, 0) + '-' + (expDateUnformted.getDate() + 1).toString().padStart(2, 0);
 
-
   let date = new Date()
   const finalDate = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) + '-' + (date.getDate() + 1).toString().padStart(2, 0);
-
 
   const dispatch = useDispatch();
   const [cardNumber, setCardNumber] = useState(currentPaymentMethod.card_number);

@@ -56,9 +56,7 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-
               <button className="splashButtonGreen" onClick={handleLogout}>Log Out</button>
-
           </>
         ) : (
           <>

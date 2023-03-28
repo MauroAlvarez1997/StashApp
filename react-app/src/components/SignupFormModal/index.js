@@ -18,7 +18,6 @@ function SignupFormModal() {
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (password === confirmPassword) {

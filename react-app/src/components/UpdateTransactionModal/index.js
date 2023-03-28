@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
 
-
 function UpdateTransactionModal({transaction_id}) {
   const transactionsOut = useSelector(state => state.transactions.transactions_out);
   const currentTransaction = transactionsOut[transaction_id]

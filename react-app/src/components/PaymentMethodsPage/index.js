@@ -14,12 +14,10 @@ function PaymentMethodsPage({isLoaded}) {
   const paymentMethodsObj = useSelector(state => state.paymentMethods.all_payment_methods)
   const currentUser = useSelector(state => state.session.user)
 
-  // const allUsersObj = users.all_users
   const paymentMethodsArr = Object.values(paymentMethodsObj)
 
   const dispatch = useDispatch();
   const [loaded, setLoaded] = useState(false);
-  // const allTransactionsArr = Object.values(transactions.all_transactions)
 
   useEffect(() => {
 		dispatch(thunkAllPaymentMethods()).then(() => setLoaded(true));
@@ -32,7 +30,6 @@ function PaymentMethodsPage({isLoaded}) {
 		}
 	}
 
-
   return loaded && (
     <div className="lowerPageContainer">
       <div className="leftLowerPageConainer">
@@ -41,7 +38,6 @@ function PaymentMethodsPage({isLoaded}) {
       <div className="rightLowerPageContainer">
       <div className="PageTitleContainer">
         <h1 className="PageTitle">Payment Method Page</h1>
-
       </div>
       <div className="button-paymentMethod-Container">
         <div className="createCardContainer">
@@ -80,56 +76,9 @@ function PaymentMethodsPage({isLoaded}) {
           ))}
         </div>
       </div>
-
-
       </div>
     </div>
   )
-
-  // if(!allUsersArr.length){
-  //    return (
-  //      <h1> <i class="fa-solid fa-comments-dollar"></i> Stash App is loading...</h1>
-  //    )
-  //  }
-
-	//  return loaded && (
-	//  	<div className="lowerPageContainer">
-  //      <div className="leftLowerPageConainer">
-  //        <SideNavBarPage/>
-  //      </div>
-  //      <div className="rightLowerPageContainer">
-  //      <h1>Payment Informtion Page</h1>
-  //        <div className='transactionContainer'>
-
-  //        {loaded && allTransactionsArr.map((transaction)=> (
-  //         <div key={transaction.id} className='transactionBar'>
-  //           <div className='transactionInnerBar'>
-  //             {/* get name by getting all users in session state and keying into it with the id from this list */}
-  //             <i class="fa-regular fa-circle-user fa-xl"></i>
-  //             <div>{allUsersObj[transaction.sender_id].firstname} {allUsersObj[transaction.sender_id].lastname}</div>
-  //             <div>{transaction.created_at}</div>
-  //             <div>{transaction.payment_message}</div>
-  //             <div>${transaction.payment_amount}</div>
-  //             {(currentUser.id === transaction.sender_id) && (
-  //               <div>
-  //                 <OpenModalButton
-  //                   buttonText="Update"
-  //                   // onItemClick={closeMenu}
-  //                   modalComponent={<UpdateTransactionModal transaction_id={transaction.id} />}
-  //                 />
-  //                 <button onClick={()=>handleDelete(transaction.id)}>
-  //                   Delete
-  //                 </button>
-  //               </div>
-  //             )
-  //             }
-  //           </div>
-  //         </div>
-  //       ))}
-  //     </div>
-  //     </div>
-	// 	</div>
-	// );
 }
 
 export default PaymentMethodsPage;

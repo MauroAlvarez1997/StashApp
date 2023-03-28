@@ -5,6 +5,8 @@
   flex-direction: column;
   color: #fff;
   margin-top: 52px;
+  justify-items: center;
+  align-items: center;
 }
 
 .topUserInfoSideNav{
@@ -52,5 +54,5 @@
 .sideNavBarClickLink{
   padding: 10px 0;
   margin-bottom: 30px;
-  
+
 }

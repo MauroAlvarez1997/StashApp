@@ -31,7 +31,7 @@ def get_all_paymentmethods():
 
     all_paymentmethods_obj = {}
     for i in all_paymentmethods_arr:
-        print('THIS IS THE I!!!!!!!!!!',i)
+
         all_paymentmethods_obj[i.id] = i.to_dict()
 
 
@@ -62,7 +62,7 @@ def update_transaction(paymentmethod_id):
 def create_transaction():
     form = PaymentMethodForm()
     my_id = current_user.id
-    print('this is in the create rout, my_id', my_id)
+    
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
       newPaymentMethod = PaymentMethod(

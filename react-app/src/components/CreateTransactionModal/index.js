@@ -10,8 +10,6 @@ function CreateTransactionModal() {
   const currentUser = useSelector(state => state.session.user);
   const statePaymentMethodsObj = useSelector(state => state.paymentMethods);
 
-  console.log('HELLO FORM INSIDE THE MODAL', statePaymentMethodsObj)
-
   let allUsersArr = Object.values(allUsersObj)
   let initialPayMethodArr = Object.values(statePaymentMethodsObj.all_payment_methods)
   let paymentMethodsArr = ['', ...initialPayMethodArr]
@@ -125,7 +123,6 @@ function CreateTransactionModal() {
 				</button>
         </div>
       </form>
-
     </div>
   )
 }

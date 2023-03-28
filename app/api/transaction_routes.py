@@ -25,9 +25,9 @@ def get_all_transactions():
     """
 
 
-    print("You hit the route!!!!!")
+
     my_id = current_user.id
-    print('AAAAA', my_id)
+
 
     all_transactions = Transaction.query.filter(or_(Transaction.sender_id == my_id, Transaction.recipient_id == my_id)).all()
     transactions_out = Transaction.query.filter(Transaction.sender_id == my_id).all()
@@ -39,18 +39,20 @@ def get_all_transactions():
 
     all_transactions_obj = {}
     for i in all_transactions_arr:
-        print('THIS IS THE I!!!!!!!!!!',i)
+
         all_transactions_obj[i.id] = i.to_dict()
 
     transactions_out_obj = {}
     for i in transactions_out_arr:
-        print('THIS IS THE I OUT!!!!!!!!!!',i)
+
         transactions_out_obj[i.id] = i.to_dict()
 
     transactions_in_obj = {}
     for i in transactions_in_arr:
-        print('THIS IS THE I IN!!!!!!!!!!',i)
+
         transactions_in_obj[i.id] = i.to_dict()
+
+    all_transactions_arr.reverse()
 
     return {'all_transactions': all_transactions_obj, 'transactions_out': transactions_out_obj, 'transactions_in': transactions_in_obj,}
 
@@ -64,7 +66,7 @@ def update_transaction(transaction_id):
     if form.validate_on_submit():
         transaction_to_update = Transaction.query.filter(Transaction.id == transaction_id).one()
         # dicted = transaction_to_update.to_dict()
-        # print('HERES MY TRANSACTION TO UPDATE!!!!!!!!!', dicted)
+        
         transaction_to_update.sender_id = form.data['sender_id']
         transaction_to_update.recipient_id = form.data['recipient_id']
         transaction_to_update.payment_method_id = form.data['payment_method_id']

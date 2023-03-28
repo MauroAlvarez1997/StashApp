@@ -11,13 +11,11 @@ function SideNavBarPage(){
   const dispatch = useDispatch();
   const [loaded, setLoaded] = useState(false);
   const statePaymentMethodsObj = useSelector(state => state.paymentMethods);
-  console.log('this is the side nav bar',statePaymentMethodsObj)
+  
 
   useEffect(() => {
 		dispatch(thunkAllPaymentMethods()).then(() => setLoaded(true));
 	}, [dispatch]);
-
-
 
 	return loaded && (
 		<div className='sideNavBar'>
@@ -33,7 +31,6 @@ function SideNavBarPage(){
           <NavLink exact to="/activities">
             <i class="fa-regular fa-clock"></i> Activity
           </NavLink>
-
         </div>
         <div className='sideNavBarClickLink'>
           <NavLink exact to="/payment-methods">

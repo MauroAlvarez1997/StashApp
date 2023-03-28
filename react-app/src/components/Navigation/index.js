@@ -18,15 +18,12 @@ function Navigation({ isLoaded }){
 	return (
 		<div className={navBarClassName}>
 			<div className='navContainerHome'>
-
-
 				<div>
 				{sessionUser ? (
 						<NavLink className='homeLogoGreen' exact to="/activities"> <i class="fa-solid fa-comments-dollar"></i>  Stash App</NavLink>
 					) : (
 						<NavLink className='homeLogo' exact to="/"> <i class="fa-solid fa-comments-dollar"></i>  Stash App</NavLink>
 					)}
-
 				</div>
 				{isLoaded && (
 					<div>

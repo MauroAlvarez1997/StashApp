@@ -96,8 +96,6 @@ function CreatePaymentMethodModal() {
          </button>
        </div>
        </form>
-
-
     </div>
   )
 }
