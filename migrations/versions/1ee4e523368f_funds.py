@@ -1,16 +1,20 @@
-"""seeder added
+"""empty message
 
-Revision ID: 04f3a5fadeb6
-Revises: 
-Create Date: 2023-03-28 12:50:23.496851
+Revision ID: 2266e4fe896d
+Revises:
+Create Date: 2023-02-22 03:25:47.320913
 
 """
 from alembic import op
 import sqlalchemy as sa
 
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
+
 
 # revision identifiers, used by Alembic.
-revision = '04f3a5fadeb6'
+revision = 'ffdc0a98111c'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,6 +34,8 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     op.create_table('funds',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('funds', sa.Integer(), nullable=False),
@@ -37,6 +43,8 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE funds SET SCHEMA {SCHEMA};")
     op.create_table('paymentmethods',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('card_number', sa.String(length=16), nullable=False),
@@ -47,6 +55,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('card_number')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE paymentmethods SET SCHEMA {SCHEMA};")
     op.create_table('transactions',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('sender_id', sa.Integer(), nullable=False),
@@ -59,6 +69,8 @@ def upgrade():
     sa.ForeignKeyConstraint(['sender_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE transactions SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
