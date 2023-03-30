@@ -19,7 +19,8 @@ function ActivitiesPage({isLoaded}) {
 
   const dispatch = useDispatch();
   const [loaded, setLoaded] = useState(false);
-  const allTransactionsArr = Object.values(transactions.all_transactions)
+  const originalAllTransactionsArr = Object.values(transactions.all_transactions)
+  const allTransactionsArr = originalAllTransactionsArr.reverse()
 
   useEffect(() => {
 		dispatch(thunkAllActivities()).then(dispatch(thunkAllUsers())).then(() => setLoaded(true));
@@ -45,7 +46,7 @@ function ActivitiesPage({isLoaded}) {
       </div>
       <div className="rightLowerPageContainer">
         <div className="PageTitleContainer">
-          <h1 className="PageTitle">ActivitiesPage</h1>
+          <h1 className="PageTitle">Account Activity</h1>
         </div>
         <div className='transactionContainer'>
 

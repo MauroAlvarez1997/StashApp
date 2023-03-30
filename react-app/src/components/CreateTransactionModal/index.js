@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
 import { thunkAllPaymentMethods } from "../../store/pymentmethods";
+import { thunkUpdateFunds } from "../../store/funds";
+import { authenticate } from "../../store/session";
 
 function CreateTransactionModal() {
   const allUsersObj = useSelector(state => state.users.all_users);
@@ -12,7 +14,10 @@ function CreateTransactionModal() {
 
   let allUsersArr = Object.values(allUsersObj)
   let initialPayMethodArr = Object.values(statePaymentMethodsObj.all_payment_methods)
-  let paymentMethodsArr = ['', ...initialPayMethodArr]
+  let paymentMethodsArr = [...initialPayMethodArr]
+
+  let optionsArr = ['', 'Use Stash' , ...initialPayMethodArr.map((option)=> option.card_number)]
+  console.log('CCCCCCCCCC',optionsArr)
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -33,27 +38,57 @@ function CreateTransactionModal() {
   filteredUsersArr.forEach((element) => (filteredUsersObj[element.username] = element));
   let selectUser = filteredUsersObj[recipient]
 
+  console.log('AAAAAAAAAAA', paymentMethodsArr)
   const paymentMethodsObj = {}
   paymentMethodsArr.forEach((element) => (paymentMethodsObj[element.card_number] = element));
   let selectPaymentMethod = paymentMethodsObj[paymentMethod]
+  console.log('BBBBBBBBBBBB', paymentMethodsArr)
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
 
-    let data = {
-      sender_id: currentUser.id,
-      recipient_id: selectUser.id,
-      payment_method_id: selectPaymentMethod.id,
-      payment_amount: amount,
-      payment_message: message,
-    }
+    if(paymentMethod=== 'Use Stash'){
+      let defaultPayment = paymentMethodsArr[0].id
+      const total = Number(currentUser.funds) - Number(amount)
 
-    const createdActivity = await dispatch(thunkCreateActivity(data));
+      let data = {
+        sender_id: currentUser.id,
+        recipient_id: selectUser.id,
+        payment_method_id: defaultPayment,
+        payment_amount: amount,
+        payment_message: message,
+      }
+      let fundsData = {
+        user_id: currentUser.id,
+        funds: total,
+      }
+      if(total<0){
+        alert('Sorry, you do not have enough funds at this time.')
+      }else{
+        const createdActivity = await dispatch(thunkCreateActivity(data)).then( dispatch(thunkUpdateFunds(fundsData))).then(dispatch(authenticate()));
+        if (createdActivity) {
+          setErrors(createdActivity);
+        } else {
+          closeModal()
+        }
+      }
 
-    if (createdActivity) {
-      setErrors(createdActivity);
     } else {
-      closeModal()
+      let data = {
+        sender_id: currentUser.id,
+        recipient_id: selectUser.id,
+        payment_method_id: selectPaymentMethod.id,
+        payment_amount: amount,
+        payment_message: message,
+      }
+      const createdActivity = await dispatch(thunkCreateActivity(data));
+
+      if (createdActivity) {
+        setErrors(createdActivity);
+      } else {
+        closeModal()
+      }
     }
   };
 
@@ -75,7 +110,7 @@ function CreateTransactionModal() {
 					value={amount}
 					onChange={(e) => setAmount(e.target.value)}
 					required
-					min={0}
+					min={1}
 				/>
 			</label>
       <label className='labelContainer'>
@@ -95,14 +130,14 @@ function CreateTransactionModal() {
        <label className='labelContainer'>
          Payment Method
          <select
-         className="inputBox"
+          className="inputBox"
            type="text"
            value={paymentMethod}
            onChange={(e) => setPaymentMethod(e.target.value)}
            required
          >
-          {paymentMethodsArr.map((option) => (
-									<option className="inputBox" key={option.id}>{option.card_number}</option>
+          {optionsArr.map((option) => (
+									<option className="inputBox" >{option}</option>
 								))}
          </select>
        </label >

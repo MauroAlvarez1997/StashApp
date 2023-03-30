@@ -52,7 +52,6 @@ def get_all_transactions():
 
         transactions_in_obj[i.id] = i.to_dict()
 
-    all_transactions_arr.reverse()
 
     return {'all_transactions': all_transactions_obj, 'transactions_out': transactions_out_obj, 'transactions_in': transactions_in_obj,}
 
@@ -66,7 +65,7 @@ def update_transaction(transaction_id):
     if form.validate_on_submit():
         transaction_to_update = Transaction.query.filter(Transaction.id == transaction_id).one()
         # dicted = transaction_to_update.to_dict()
-        
+
         transaction_to_update.sender_id = form.data['sender_id']
         transaction_to_update.recipient_id = form.data['recipient_id']
         transaction_to_update.payment_method_id = form.data['payment_method_id']

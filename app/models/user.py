@@ -18,6 +18,7 @@ class User(db.Model, UserMixin):
     phone_number = db.Column(db.String(10), nullable=False)
 
     # relationships
+    funds = db.relationship('Funds', back_populates='users', cascade='all, delete')
     payment_methods = db.relationship('PaymentMethod', back_populates='users', cascade='all, delete')
     # transactions = db.relationship('Transaction', backref='users')
     transaction_out = db.relationship(
@@ -51,10 +52,11 @@ class User(db.Model, UserMixin):
             # 'sender': self.sender,
             'transactions_in': [transaction.to_dict() for transaction in self.transaction_in],
             'transactions_out': [transaction.to_dict() for transaction in self.transaction_out],
-            'payment_methods': [method.to_dict() for method in self.payment_methods]
+            'payment_methods': [method.to_dict() for method in self.payment_methods],
+            'funds': [money.to_dict() for money in self.funds][0]['funds'],
         }
 
-    def to_dict_transactions(self):
+    def to_dict_funds(self):
         return {
             'id': self.id,
             'username': self.username,

@@ -9,6 +9,7 @@ import SplashPage from "./components/SplashPage";
 import ActivitiesPage from './components/ActivitiesPage'
 import SideNavBarPage from "./components/SideNavBarPage";
 import PaymentMethodsPage from "./components/PaymentMethodsPage";
+import FundsPage from "./components/FundsPage";
 import './index.css'
 
 function App() {
@@ -39,6 +40,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/funds">
+            <FundsPage />
           </Route>
           <Route exact path='/'>
 						<SplashPage />

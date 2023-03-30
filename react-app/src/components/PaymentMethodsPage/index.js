@@ -37,7 +37,7 @@ function PaymentMethodsPage({isLoaded}) {
       </div>
       <div className="rightLowerPageContainer">
       <div className="PageTitleContainer">
-        <h1 className="PageTitle">Payment Method Page</h1>
+        <h1 className="PageTitle">Payment Methods</h1>
       </div>
       <div className="button-paymentMethod-Container">
         <div className="createCardContainer">

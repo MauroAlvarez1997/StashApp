@@ -4,12 +4,14 @@ import session from './session'
 import transactions from './activities';
 import users from './users';
 import paymentMethods from './pymentmethods';
+import funds from './funds';
 
 const rootReducer = combineReducers({
   session,
   transactions,
   users,
   paymentMethods,
+  funds,
 });
 
 

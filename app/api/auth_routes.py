@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, db, Funds
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -71,6 +71,15 @@ def sign_up():
             phone_number=form.data['phone_number'],
         )
         db.session.add(user)
+        db.session.commit()
+        dict_user = user.to_dict()
+        print('THIS IS DICT_USER!!!!!!!!', dict_user)
+        print('THIS IS DICT_USER!!!!!!!!', dict_user['id'])
+        funds = Funds(
+            funds=0,
+            user_id = dict_user['id']
+        )
+        db.session.add(funds)
         db.session.commit()
         login_user(user)
         return user.to_dict()
