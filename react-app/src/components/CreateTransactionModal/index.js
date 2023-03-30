@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { thunkAllPaymentMethods } from "../../store/pymentmethods";
 import { thunkUpdateFunds } from "../../store/funds";
 import { authenticate } from "../../store/session";
+import { thunkAllUsers } from "../../store/users";
 
 function CreateTransactionModal() {
   const allUsersObj = useSelector(state => state.users.all_users);
@@ -17,7 +18,7 @@ function CreateTransactionModal() {
   let paymentMethodsArr = [...initialPayMethodArr]
 
   let optionsArr = ['', 'Use Stash' , ...initialPayMethodArr.map((option)=> option.card_number)]
-  console.log('CCCCCCCCCC',optionsArr)
+
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -30,19 +31,19 @@ function CreateTransactionModal() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-		dispatch(thunkAllPaymentMethods()).then(() => setLoaded(true));
+		dispatch(thunkAllPaymentMethods()).then(dispatch(thunkAllUsers())).then(() => setLoaded(true));
 	}, [dispatch]);
 
   const filteredUsersArr = ['', ...allUsersArr?.filter(user => user.id !== currentUser.id)]
   const filteredUsersObj = {}
   filteredUsersArr.forEach((element) => (filteredUsersObj[element.username] = element));
   let selectUser = filteredUsersObj[recipient]
+  console.log('CCCCCCCCCC', filteredUsersArr)
 
-  console.log('AAAAAAAAAAA', paymentMethodsArr)
   const paymentMethodsObj = {}
   paymentMethodsArr.forEach((element) => (paymentMethodsObj[element.card_number] = element));
   let selectPaymentMethod = paymentMethodsObj[paymentMethod]
-  console.log('BBBBBBBBBBBB', paymentMethodsArr)
+
 
   const handleSubmit = async (e) => {
 

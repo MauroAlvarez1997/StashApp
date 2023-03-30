@@ -72,9 +72,7 @@ def sign_up():
         )
         db.session.add(user)
         db.session.commit()
-        dict_user = user.to_dict()
-        print('THIS IS DICT_USER!!!!!!!!', dict_user)
-        print('THIS IS DICT_USER!!!!!!!!', dict_user['id'])
+        dict_user = user.to_dict_funds()
         funds = Funds(
             funds=0,
             user_id = dict_user['id']
