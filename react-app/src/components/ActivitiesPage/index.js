@@ -54,7 +54,7 @@ function ActivitiesPage({isLoaded}) {
           <div key={transaction.id} className='transactionBar'>
             <div className='transactionInnerBar'>
               {/* get name by getting all users in session state and keying into it with the id from this list */}
-              <i class="fa-regular fa-circle-user fa-2xl"></i>
+              <img className="profile-photo-transaction" src={allUsersObj[transaction.sender_id].profile_photo} ></img>
               <div>{allUsersObj[transaction.sender_id].firstname} {allUsersObj[transaction.sender_id].lastname}</div>
               <div>{transaction.created_at}</div>
               <div>{transaction.payment_message}</div>

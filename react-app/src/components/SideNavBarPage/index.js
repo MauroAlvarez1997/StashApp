@@ -22,7 +22,8 @@ function SideNavBarPage(){
 		<div className='sideNavBar'>
       <div className='topUserInfoSideNav'>
         <div className='SideNavIcon'>
-        <i className="fa-regular fa-circle-user fa-2xl"></i>
+        {/* <i className="fa-regular fa-circle-user fa-2xl"></i> */}
+          <img className="profile-photo" src={sessionUser.profile_photo} ></img>
         </div>
         <div className='first-last-name-SideNav'>{sessionUser.firstname} {sessionUser.lastname}</div>
         <div className='username-SideNav'><i class="fa-solid fa-comment-dollar"></i> {sessionUser.username}</div>

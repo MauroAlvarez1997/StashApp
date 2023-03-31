@@ -113,3 +113,11 @@
 .transactionBar:hover{
   background-color: #f7f7f7;
 }
+
+.profile-photo-transaction{
+  object-fit: cover;
+  border-radius: 160px;
+  height: 45px;
+  width: 45px;
+  transform: scale(1,1);
+}

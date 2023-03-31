@@ -16,6 +16,7 @@ class User(db.Model, UserMixin):
     firstname = db.Column(db.String(100), nullable=False)
     lastname = db.Column(db.String(100), nullable=False)
     phone_number = db.Column(db.String(10), nullable=False)
+    profile_photo = db.Column(db.String(500), nullable=True)
 
     # relationships
     funds = db.relationship('Funds', back_populates='users', cascade='all, delete')
@@ -54,6 +55,7 @@ class User(db.Model, UserMixin):
             'transactions_out': [transaction.to_dict() for transaction in self.transaction_out],
             'payment_methods': [method.to_dict() for method in self.payment_methods],
             'funds': [money.to_dict() for money in self.funds][0]['funds'],
+            'profile_photo': self.profile_photo,
         }
 
     def to_dict_funds(self):
@@ -64,8 +66,4 @@ class User(db.Model, UserMixin):
             'lastname': self.lastname,
             'email': self.email,
             'phone_number': self.phone_number,
-            # 'payment_methods': [method.to_dict() for method in self.payment_method],
-            # 'transactions': [transaction.to_dict() for transaction in self.transactions],
-            # 'transactions_out': [transaction.to_dict() for transaction in self.transactions if transaction.sender_id == self.id],
-            # 'transactions_in': [transaction.to_dict() for transaction in self.transactions if transaction.recipient_id == self.id],
         }

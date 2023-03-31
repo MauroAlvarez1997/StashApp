@@ -35,6 +35,14 @@
   border-radius: 60px;
 }
 
+.profile-photo{
+  object-fit: cover;
+  border-radius: 160px;
+  height: 70px;
+  width: 70px;
+  transform: scale(1,1);
+}
+
 .bittomInfoSideNav{
   display: flex;
   flex-direction: column;
