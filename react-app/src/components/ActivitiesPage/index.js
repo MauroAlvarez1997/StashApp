@@ -8,7 +8,7 @@ import './ActivitiesPage.css'
 import OpenModalButton from "../OpenModalButton";
 import UpdateTransactionModal from "../UpdateTransactionModal";
 import { thunkDeleteActivities } from "../../store/activities";
-
+import { authenticate } from "../../store/session";
 
 function ActivitiesPage({isLoaded}) {
   const transactions = useSelector(state => state.transactions);
@@ -23,7 +23,7 @@ function ActivitiesPage({isLoaded}) {
   const allTransactionsArr = originalAllTransactionsArr.reverse()
 
   useEffect(() => {
-		dispatch(thunkAllActivities()).then(dispatch(thunkAllUsers())).then(() => setLoaded(true));
+		dispatch(thunkAllActivities()).then(dispatch(thunkAllUsers())).then( dispatch(authenticate())).then(() => setLoaded(true));
 	}, [dispatch]);
 
   async function handleDelete(id) {

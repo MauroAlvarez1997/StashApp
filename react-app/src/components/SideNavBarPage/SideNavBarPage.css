@@ -26,20 +26,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 35px;
-  width: 70px;
-  height: 70px;
+  height: 115px;
+  width: 115px;
   font-size: 33px;
   margin-bottom: 20px;
-  background-color: #41EBC1;
   border-radius: 60px;
+  z-index: 100;
 }
+
+#a:hover #b {
+  z-index: -110;
+}
+
+/* .profile-photo-edit:hover{
+  z-index: 100;
+} */
 
 .profile-photo{
   object-fit: cover;
   border-radius: 160px;
-  height: 70px;
-  width: 70px;
+  height: 115px;
+  width: 115px;
+  transform: scale(1,1);
+}
+
+.profile-photo-edit{
+  position: absolute;
+  object-fit: cover;
+  border-radius: 160px;
+  height: 115px;
+  width: 115px;
   transform: scale(1,1);
 }
 
@@ -48,7 +64,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-bottom: 75px;
 }
 
 .sideNavBarClickLink a{
