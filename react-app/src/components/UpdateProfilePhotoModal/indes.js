@@ -60,7 +60,7 @@ function UpdateProfilePhotoModal() {
 
   return (
     <div className="modlBody">
-      <h1 className="modalTitle">Update Profile Photo</h1>
+      <h1 className="modalTitle">Profile Photo</h1>
       <form className="modalFormBody" onSubmit={handleSubmit}>
         {/* {errors.length && (
         )} */}
@@ -69,8 +69,7 @@ function UpdateProfilePhotoModal() {
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        <label className='labelContainer'>
-        <label className='labelContainer' >Profile Photo</label>
+        <label className='labelContainer'>Profile Photo
           <input
             className="inputBox"
             type="url"

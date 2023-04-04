@@ -19,7 +19,7 @@ function BlankOpenModalButton({
 
 
     return (
-      <div className="SideNavIcon" onClick={onClick}>
+      <div id='a' className="SideNavIcon" onClick={onClick}>
         <img className="profile-photo-edit" src="https://icons.veryicon.com/png/o/miscellaneous/linear-small-icon/edit-246.png" alt="alternatetext"></img>
         <img id='b' className="profile-photo" src={sessionUser.profile_photo} ></img>
       </div>
