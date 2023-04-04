@@ -2,8 +2,8 @@ from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from app.models import User, db
 from app.forms.user_form import UserForm
-from app.aws_upload_functionality import (
-    upload_file_to_s3, allowed_file, get_unique_filename)
+# from app.aws_upload_functionality import (
+#     upload_file_to_s3, allowed_file, get_unique_filename)
 
 user_routes = Blueprint('users', __name__)
 
