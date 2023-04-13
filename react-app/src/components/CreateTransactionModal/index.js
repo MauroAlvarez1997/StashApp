@@ -95,7 +95,7 @@ function CreateTransactionModal() {
 
   if(!initialPayMethodArr.length){
     return (
-      <h1>Can't create transaction without payment methods</h1>
+      <div className="empty-page-message">Can't create transaction without payment methods</div>
     )
   }
 
