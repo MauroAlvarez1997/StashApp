@@ -55,9 +55,9 @@ function ActivitiesPage({isLoaded}) {
             <div className='transactionInnerBar'>
               {/* get name by getting all users in session state and keying into it with the id from this list */}
               <img className="profile-photo-transaction" src={allUsersObj[transaction.sender_id].profile_photo} ></img>
-              <div>{allUsersObj[transaction.sender_id].firstname} {allUsersObj[transaction.sender_id].lastname}</div>
+              <div className="activity-username">{allUsersObj[transaction.sender_id].username} </div>
               <div>{transaction.created_at}</div>
-              <div>{transaction.payment_message}</div>
+              <div className="activity-message" >{transaction.payment_message}</div>
               <div>${transaction.payment_amount}</div>
             </div>
               {(currentUser.id === transaction.sender_id) && (
@@ -73,10 +73,23 @@ function ActivitiesPage({isLoaded}) {
                 </div>
               )
               }
-
           </div>
         ))}
+
       </div>
+        {allTransactionsArr.length === 0 &&
+        <div className="empty-page-message-container-outer">
+          <div className="empty-page-message-container">
+            <div className="empty-page-message">
+              You currently have no transactions!
+            </div>
+            <div className="empty-page-message">
+              Click NEW to create your first transaction!
+            </div>
+          </div>
+          <img className="empty-page-message-green-arrow" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREBlzaNt8U0SchnnFmvz06Lhj0-hwzQNwlB-uAbQgbwgQ0FFnRuPij9wVEy83UwXnB-T4&usqp=CAU"></img>
+        </div>
+        }
       </div>
 		</div>
 	);

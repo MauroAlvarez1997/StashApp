@@ -47,7 +47,7 @@ function PaymentMethodsPage({isLoaded}) {
           />
         </div>
         <div className="allPaymentMethodsContainer">
-          {(paymentMethodsArr.length && loaded) && paymentMethodsArr.map((card)=> (
+          {(paymentMethodsArr.length > 0 && loaded) && paymentMethodsArr.map((card)=> (
             <div className="singleCardContainer" key={card.id}>
               <div className="topCardContainer">
                 <div className="cardNumber">
@@ -75,6 +75,22 @@ function PaymentMethodsPage({isLoaded}) {
             </div>
           ))}
         </div>
+        {paymentMethodsArr.length === 0 &&
+          <div className="empty-page-message-container-outer">
+            {/* <img className="empty-page-message-green-arrow" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREBlzaNt8U0SchnnFmvz06Lhj0-hwzQNwlB-uAbQgbwgQ0FFnRuPij9wVEy83UwXnB-T4&usqp=CAU"></img> */}
+            <div className="empty-page-message-container">
+              <div className="empty-page-message">
+                You currently have no payment methods on file!
+              </div>
+              <div className="empty-page-message">
+                Click the "Add Payment Method" button above to create 
+              </div>
+              <div className="empty-page-message">
+                your first payment method!
+              </div>
+            </div>
+          </div>
+        }
       </div>
       </div>
     </div>

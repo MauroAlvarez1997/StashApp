@@ -121,3 +121,42 @@
   width: 45px;
   transform: scale(1,1);
 }
+
+.activity-message{
+  min-width: 150px;
+  max-width: 150px;
+  overflow-wrap: break-word;
+}
+
+.activity-username{
+  max-width: 60px;
+  min-width: 60px;
+  overflow-wrap: break-word;
+}
+
+.empty-page-message-container-outer{
+  background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(42,47,53,.1);
+    margin-top: 20px;
+    padding: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+.empty-page-message-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.empty-page-message{
+  font-size: 40px;
+  font-weight: bold;
+  color: #0bb634;
+}
+
+.empty-page-message-green-arrow{
+  max-width: 50%;
+}
