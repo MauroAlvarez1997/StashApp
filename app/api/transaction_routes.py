@@ -23,20 +23,22 @@ def get_all_transactions():
     """
     Retrieve all of a user's transaction
     """
-
-
-
+    # use flask_login import to get the current users ID
     my_id = current_user.id
 
-
+    # get all of the current users transactions using id
     all_transactions = Transaction.query.filter(or_(Transaction.sender_id == my_id, Transaction.recipient_id == my_id)).all()
+
+    # divide those transactions bewteen outgoing funds and incoming funds
     transactions_out = Transaction.query.filter(Transaction.sender_id == my_id).all()
     transactions_in = Transaction.query.filter(Transaction.recipient_id == my_id).all()
 
+    # convert queries into arrays
     all_transactions_arr = [all_t for all_t in all_transactions]
     transactions_out_arr = [t_out for t_out in transactions_out]
     transactions_in_arr = [t_in for t_in in transactions_in]
 
+    # iterate through them and run to dict on each transaction
     all_transactions_obj = {}
     for i in all_transactions_arr:
 
@@ -52,7 +54,7 @@ def get_all_transactions():
 
         transactions_in_obj[i.id] = i.to_dict()
 
-
+    # return the new state 
     return {'all_transactions': all_transactions_obj, 'transactions_out': transactions_out_obj, 'transactions_in': transactions_in_obj,}
 
 
