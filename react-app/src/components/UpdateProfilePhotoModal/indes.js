@@ -51,12 +51,12 @@ function UpdateProfilePhotoModal() {
     } else {
         // history.push("/activities");
         closeModal()
-        await dispatch(thunkAllUsers())
-        await dispatch(thunkAllActivities())
-        await dispatch(authenticate())
+        dispatch(thunkAllUsers())
+        dispatch(thunkAllActivities())
+        dispatch(authenticate())
     }
   };
-  if(!currentUser) return <h1>Loading Profile...</h1>
+  if(!currentUser || !currentUser.profile_photo) return <h1>Loading Profile...</h1>
 
   return (
     <div className="modlBody">

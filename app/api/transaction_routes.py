@@ -21,7 +21,7 @@ def validation_errors_to_error_messages(validation_errors):
 @login_required
 def get_all_transactions():
     """
-    Retrieve all of a user's transaction
+    Retrieve all of a user's transaction+
     """
     # use flask_login import to get the current users ID
     my_id = current_user.id
@@ -54,7 +54,7 @@ def get_all_transactions():
 
         transactions_in_obj[i.id] = i.to_dict()
 
-    # return the new state 
+    # return the new state
     return {'all_transactions': all_transactions_obj, 'transactions_out': transactions_out_obj, 'transactions_in': transactions_in_obj,}
 
 

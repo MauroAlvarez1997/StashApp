@@ -39,7 +39,7 @@ function ActivitiesPage({isLoaded}) {
     )
   }
 
-	return loaded && (
+	return (loaded && allTransactionsArr) && (
 		<div className="lowerPageContainer">
       <div className="leftLowerPageConainer">
         <SideNavBarPage/>
