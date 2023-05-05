@@ -22,6 +22,24 @@ function ActivitiesPage({isLoaded}) {
   const originalAllTransactionsArr = Object.values(transactions.all_transactions)
   const allTransactionsArr = originalAllTransactionsArr.reverse()
 
+  const usernameCheck = (s) => {
+    if(s === currentUser.username){
+      return 'Sending'
+    }
+    else{
+      return s
+    }
+  }
+
+  const moneyCheck = (s) => {
+    if(s === currentUser.username){
+      return '-'
+    }
+    else{
+      return '+'
+    }
+  }
+
   useEffect(() => {
 		dispatch(thunkAllActivities()).then(dispatch(thunkAllUsers())).then( dispatch(authenticate())).then(() => setLoaded(true));
 	}, [dispatch]);
@@ -55,10 +73,10 @@ function ActivitiesPage({isLoaded}) {
             <div className='transactionInnerBar'>
               {/* get name by getting all users in session state and keying into it with the id from this list */}
               <img className="profile-photo-transaction" src={allUsersObj[transaction.sender_id].profile_photo} ></img>
-              <div className="activity-username">{allUsersObj[transaction.sender_id].username} </div>
+              <div className="activity-username">{usernameCheck(allUsersObj[transaction.sender_id].username)} </div>
               <div>{transaction.created_at}</div>
               <div className="activity-message" >{transaction.payment_message}</div>
-              <div>${transaction.payment_amount}</div>
+              <div>{moneyCheck(allUsersObj[transaction.sender_id].username)}${transaction.payment_amount}</div>
             </div>
               {(currentUser.id === transaction.sender_id) && (
                 <div>
