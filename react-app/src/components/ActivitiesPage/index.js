@@ -22,12 +22,12 @@ function ActivitiesPage({isLoaded}) {
   const originalAllTransactionsArr = Object.values(transactions.all_transactions)
   const allTransactionsArr = originalAllTransactionsArr.reverse()
 
-  const usernameCheck = (s) => {
+  const usernameCheck = (s, recipient_id) => {
     if(s === currentUser.username){
-      return 'Sending'
+      return `Sent to ${allUsersObj[recipient_id].username}`
     }
     else{
-      return s
+      return `From ${s}`
     }
   }
 
@@ -73,7 +73,7 @@ function ActivitiesPage({isLoaded}) {
             <div className='transactionInnerBar'>
               {/* get name by getting all users in session state and keying into it with the id from this list */}
               <img className="profile-photo-transaction" src={allUsersObj[transaction.sender_id].profile_photo} ></img>
-              <div className="activity-username">{usernameCheck(allUsersObj[transaction.sender_id].username)} </div>
+              <div className="activity-username">{usernameCheck(allUsersObj[transaction.sender_id].username, transaction.recipient_id)} </div>
               <div>{transaction.created_at}</div>
               <div className="activity-message" >{transaction.payment_message}</div>
               <div>{moneyCheck(allUsersObj[transaction.sender_id].username)}${transaction.payment_amount}</div>
